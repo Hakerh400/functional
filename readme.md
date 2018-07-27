@@ -73,4 +73,21 @@ The native functions are:
 
 *FunctionTemplate* is a function which has an internal list of formal arguments. When called, it doesn't evaluate it's arguments, but stores the argument list as its body and returns a new *UserlandFunction*.
 
-*UserlandFunction* takes zero or more arguments, and evaluates them. Then each evaluated argument is assigned to the corresponding internal formal argument and the function body is evaluated in the new scope based on the formal and actual arguments.
+*UserlandFunction* takes zero or more arguments and evaluates them. Then each evaluated argument is assigned to the corresponding internal formal argument and the function body is evaluated in the new scope based on the formal and actual arguments.
+
+## IO interface
+
+*Functional()* provides a way of adding native functions before running a program. This implementation provides 3 new functions for IO interface:
+
+1. Read
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes no arguments, returns the next bit (0 or 1) from the input stream
+
+2. Write
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes one argument, outputs the bit to the output stream and returns 0.
+
+3. Eof
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes no arguments, returns 1 if there are no more bits in the input stream,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; otherwise returns 0.
