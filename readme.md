@@ -33,4 +33,4 @@ Each identifier has a function associated with it. When program starts, the main
     3. Remove the first *List*
     4. Replace the identifier with the result of the call
     5. If the re are no more *List*, return the value of the identifier
-    6. Otherwise, go to 2.2.
+    6. Otherwise, go to 2.ii.
