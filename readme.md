@@ -39,7 +39,7 @@ There are some exceptions to these rules.
 
 ## Functions
 
-*Functional()* has 6 native functions. Native functions have no reserved identifiers, but their valus associated with the first 6 identifiers (reading from left to right) that appear in the source code. If the source code has less identifiers that the number of native functions, some native functions will not be associated with any identifier.
+*Functional()* has 6 native functions. Native functions have no reserved identifiers, but their values are assigned to the first 6 identifiers (reading from left to right) that appear in the source code. If the source code has less identifiers that the number of native functions, some native functions will not be assigned to any identifier.
 
 The native functions are:
 
@@ -66,7 +66,11 @@ The native functions are:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; otherwise creates a new variable in the most inner scope with name equals to the identifier<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; from the first argument and assigns the second argument to that variable.
 
-5. New function
+6. New function
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes zero or more arguments, if any of the are not an identifier, returns 0,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; otherwise returns a *FunctionTemplate*.
+
+*FunctionTemplate* is a function which has an internal list of formal arguments. When called, it doesn't evaluate it's arguments, but stores the argument list as its body and returns a new *UserlandFunction*.
+
+*UserlandFunction* takes zero or more arguments, and evaluates them. Then each evaluated argument is assigned to the corresponding internal formal argument and the function body is evaluated in the new scope based on the formal and actual arguments.
