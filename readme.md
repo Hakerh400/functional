@@ -2,7 +2,7 @@
 
 ## Syntax
 
-Source code is represented in the ascii encoding and consists of characters `(`, `)`, `,`, whitespace characters and identifiers. Example:
+Source code is represented in the ASCII encoding and consists of characters `(`, `)`, `,`, whitespace characters and identifiers. Example:
 
 ```
 abc(d(e, e1), f, g()),
@@ -113,6 +113,31 @@ write(1), write(0), write(0), write(0),
 write(0), write(0), write(1), write(0)
 ```
 
-The ascii code of letter "A" is 65, which is 1000001 in binary. Because the *Read* and *Write* functions process bits from lowest to highest, we need to reverse the bits. The last `write(0)` may be omitted because of padding incomplete bytes with 0-bits.
+The ASCII code of letter "A" is 65, which is 1000001 in binary. Because the *Read* and *Write* functions process bits from lowest to highest, we need to reverse the bits. The last `write(0)` may be omitted because of padding incomplete bytes with 0-bits.
 
-**Note:** In the next examples the header (first 9 identifiers) are omitted for simplicity, but they are required if you want to run the actual code.
+**Note:** In the following examples the header (first 9 identifiers) are omitted for simplicity, but they are required if you want to run the actual code.
+
+### Cat
+
+```
+var(not, [](a)(==(a, 0))),
+var(bool, [](a)(not(not(a)))),
+
+var(while, [](cond, func)(
+  var(temp, bool(cond()))(while)(cond, func, temp(func)())
+)),
+
+while([]()(not(eof())), []()(
+  write(read())
+))
+```
+
+There are several things demontrated in this example.
+
+Code `[](a)(==(a, 0))` creates an *UserlandFunction* that takes argument `a` and returns the result of comparison `a` with `0`. In other words, it returns `1` iff `a` is `0`, and `0` otherwise.
+
+Code `var(not, [](a)(==(a, 0)))` assigns the newly created *UserlandFunction* to the global identifier `not`.
+
+The similar thing does the second line: creates a function which takes argument `a` and returns `not(not(a))` (converts it to boolean).
+
+Now, the interesting part: *while* loop. The *while* loop is just a function which takes two arguments: `cond` and `func`. While the result of calling `cond` returns a truthy value, call `func`.
