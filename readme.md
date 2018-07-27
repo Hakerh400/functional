@@ -150,7 +150,7 @@ Finally, we call our `while` function with two *UserlandFunctions*. The first on
 
 ### Example 3: Closures
 
-In *functional()* it is possible to create a closure. A closure is created either by returning a function or passing a function (defined in the local scope) as an argument.
+In *functional()* it is possible to create a closure. A closure is created either by returning a *UserlandFunction* (defined in the local scope), or passing it as an argument.
 
 ```
 var(func, [](a)(
