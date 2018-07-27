@@ -22,18 +22,18 @@ Each identifier has a function associated with it. When program starts, the main
 *List* evaluates in the following way:
 
 1. If the *List* is empty, return the function associated with the 0-th global identifier
-2. Otherwise, evaluate all *List*'s *CallChains*
+2. Otherwise evaluate all *List*'s *CallChains*
 
 *CallChain* evaluates in the following way:
 
 1. If the *CallChain* has no *Lists*, return the value of the *CallChain*'s identifier
-2. Otherwise, do the following
+2. Otherwise do the following
     - 2.1. Evaluate all *CallChain*'s *Lists*
     - 2.2. Call the function associated with the first *List* as arguments
     - 2.3. Remove the first *List*
     - 2.4. Replace the identifier with the result of the call
     - 2.5. If there are no more *List*, return the value of the identifier
-    - 2.6. Otherwise, go to 2.2.
+    - 2.6. Otherwise go to 2.2.
 
 There are some exceptions to these rules.
 
@@ -57,4 +57,5 @@ The native functions are:
 
 4. "Assign"
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes two arguments, if the first on is not an identifier, returns 0, otherwise assigns the second argument to the identifier from the first argument.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes two arguments, if the first on is not an identifier, returns 0,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; otherwise assigns the second argument to the identifier from the first argument.
