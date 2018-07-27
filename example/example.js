@@ -20,6 +20,11 @@ function main(){
   var tick = machine.start();
   while(!tick.next().done);
 
+  if(machine.error){
+    console.log('Max stack size exceeded');
+    return;
+  }
+
   var output = io.getOutput();
   fs.writeFileSync(args.output, output);
 }

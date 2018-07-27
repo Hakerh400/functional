@@ -187,11 +187,15 @@ var(Class, [](a)(
   )
 )),
 
-var(obj, Class(1)),
+var(obj, Class(0)),
 
-obj .set(0),
 write(obj .get()),
+write(0), write(0), write(0),
+write(1), write(1), write(0), write(0),
 
+obj .set(1),
+
+write(obj .get()),
 write(0), write(0), write(0),
 write(1), write(1)
 ```
@@ -203,3 +207,15 @@ The first method is `get`. It takes no arguments and returns the value of `a`. M
 We used two tricks here. The first one is the fact that every *UserlandFunction* which is created by a separate call to the 6th native function is different, so we can use it like an enum.
 
 The second trick is syntactical: if two identifiers appear one after another (here `.get` and `.set` appear after `.obj`) they are interpreted like a *CallChain*. Note that `.get` and `.set` are just identifiers, so if you remove the space from `obj .get()` it wont work as expected. For example, `a .b .c` is equivalent to `a(.b)(.c)`, but not `a.b.c`.
+
+This code prints "01".
+
+# How to run
+
+Navigate to the `example` directory and run the following command:
+
+```
+node example.js -src src.txt -i input.txt -o output.txt
+```
+
+The `src.txt` file contains a simple *function()* program that implements BigInt addition. It reads two integers from the `input.txt` separated by a space, adds them together and saves the resulting number to `output.txt`.
