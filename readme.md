@@ -21,7 +21,7 @@ Each identifier has a function associated with it. When program starts, the main
 
 *List* evaluates in the following way:
 
-1. If the *List* is empty, return the function associated with the 0-th global identifier
+1. If the *List* is empty, return the function associated with the 0th global identifier
 2. Otherwise evaluate all *List*'s *CallChains*
 
 *CallChain* evaluates in the following way:
