@@ -44,4 +44,5 @@ There are some exceptions to these rules.
 The native functions are:
 
 1. "Zero"
-    Takes two arguments, returns the second one.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Takes two arguments, returns the second one.
