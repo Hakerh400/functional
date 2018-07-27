@@ -28,9 +28,9 @@ Each identifier has a function associated with it. When program starts, the main
 
 1. If the *CallChain* has no *Lists*, return the value of the *CallChain*'s identifier
 2. Otherwise, do the following
-  - 2.1. Evaluate all *CallChain*'s *Lists*
-  - 2.2. Call the function associated with the first *List* as arguments
-  - 2.3. Remove the first *List*
-  - 2.4. Replace the identifier with the result of the call
-  - 2.5. If the re are no more *List*, return the value of the identifier
-  - 2.6. Otherwise, go to 2.2.
+    - 2.1. Evaluate all *CallChain*'s *Lists*
+    - 2.2. Call the function associated with the first *List* as arguments
+    - 2.3. Remove the first *List*
+    - 2.4. Replace the identifier with the result of the call
+    - 2.5. If the re are no more *List*, return the value of the identifier
+    - 2.6. Otherwise, go to 2.2.
