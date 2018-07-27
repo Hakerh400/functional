@@ -2,12 +2,24 @@
 ==, =, var, [],
 read, write, eof,
 
-var(func, [](a)(
-  []()(a)
+var(.get, []()()),
+var(.set, []()()),
+
+var(Class, [](a)(
+  var(get, []()(a)),
+  var(set, [](b)(=(a, b))),
+
+  [](method)(
+    ==(method, .get)(get,
+    ==(method, .set)(set
+    ))
+  )
 )),
 
-var(closure, func(1)),
-write(closure()),
+var(obj, Class(1)),
+
+obj .set(0),
+write(obj .get()),
 
 write(0), write(0), write(0),
 write(1), write(1)

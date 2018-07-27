@@ -75,7 +75,7 @@ The native functions are:
 
 *UserlandFunction* takes zero or more arguments and evaluates them. Then each evaluated argument is assigned to the corresponding internal formal argument and the function body is evaluated in the new scope based on the formal and actual arguments.
 
-## IO interface
+## IO Interface
 
 *Functional()* provides a way of adding native functions before running a program. This implementation provides 3 new functions for IO interface:
 
@@ -104,7 +104,7 @@ We assume the standard IO interface implementation is used. The first 9 identifi
 
 In these examples we will use identifiers `0`, `1`, `==`, `=`, `var`, `[]`, `read`, `write`, `eof` respectively. Note that there are nothing special about `==`, `=`, `[]`, they are valid identifiers.
 
-### Example 1: Print letter "A"
+### Example 1: Printing letter "A"
 
 ```
 0, 1,
@@ -166,6 +166,40 @@ write(1), write(1)
 
 Function `func` takes argument `a` and returns a function that takes no arguments and returns `a`.
 
-In this example, we are passing `1` as the argument to `func`, and then obtaining it again by calling `closure()`.
+In this example, we are passing `1` as the argument to `func`, and then obtaining it again by calling `closure()`. Finally, we print the number as ASCII character "1". If you replace `func(1)` with `func(0)` it will print character "0".
 
-Finally, we print the number as ASCII character "1". If you replace `func(1)` with `func(0)` it will print character "0".
+Closures open a lot of possibilities: implementing arrays, matrices, linked lists, multidimensional tensors, etc.
+
+### Example 4: Classes
+
+```
+var(.get, []()()),
+var(.set, []()()),
+
+var(Class, [](a)(
+  var(get, []()(a)),
+  var(set, [](b)(=(a, b))),
+
+  [](method)(
+    ==(method, .get)(get,
+    ==(method, .set)(set
+    ))
+  )
+)),
+
+var(obj, Class(1)),
+
+obj .set(0),
+write(obj .get()),
+
+write(0), write(0), write(0),
+write(1), write(1)
+```
+
+Here we have class `Class` which a constructor and two methods. The constructor takes one argument and stores it as a private member `a`.
+
+The first method is `get`. It takes no arguments and returns the value of `a`. Method `set` takes an argument (here `b`) and assigns the value of `b` to `a`.
+
+We used two tricks here. The first one is the fact that every *UserlandFunction* which is created by a separate call to the 6th native function is different, so we can use it like an enum.
+
+The second trick is syntactical: if two identifiers appear one after another (here `.get` and `.set` appear after `.obj`) they are interpreted like a *CallChain*. Note that `.get` and `.set` are just identifiers, so if you remove the space from `obj .get()` it wont work as expected. For example, `a .b .c` is equivalent to `a(.b)(.c)`, but not `a.b.c`.
