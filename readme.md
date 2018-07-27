@@ -45,4 +45,8 @@ The native functions are:
 
 1. "Zero"
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Takes two arguments, returns the second one.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes two arguments, returns the second one.
+
+1. "One"
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes two arguments, returns the first one.
