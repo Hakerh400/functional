@@ -43,10 +43,18 @@ There are some exceptions to these rules.
 
 The native functions are:
 
-1. "Zero"
+1. "Zero" (0)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes two arguments, returns the second one.
 
-1. "One"
+2. "One" (1)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes two arguments, returns the first one.
+
+3. "Equality"
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes two arguments, returns 1 if they are the same, otherwise returns 0.
+
+4. "Assign"
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes two arguments, if the first on is not an identifier, returns 0, otherwise assigns the second argument to the identifier from the first argument.
