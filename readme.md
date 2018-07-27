@@ -15,7 +15,7 @@ Each program represents a *List* of zero or more *CallChains*. A *CallChain* is 
 
 The above example has two main *CallChains*: `abc(d(e, e1), f, g())` and `h(&&(^), $(@, ~))(abc)`. The first *CallChain* consists of identifier `abc` and *List* `(d(e, e1), f, g())`, while the second *CallChain* consists of identifier `h` and two *Lists*: `(&&(^), $(@, ~))` and `(abc)`.
 
-## Functions
+## Evaluation
 
 Each identifier has a function associated with it. When program starts, the main *List* starts to evaluate.
 
@@ -32,5 +32,16 @@ Each identifier has a function associated with it. When program starts, the main
     - 2.2. Call the function associated with the first *List* as arguments
     - 2.3. Remove the first *List*
     - 2.4. Replace the identifier with the result of the call
-    - 2.5. If the re are no more *List*, return the value of the identifier
+    - 2.5. If there are no more *List*, return the value of the identifier
     - 2.6. Otherwise, go to 2.2.
+
+There are some exceptions to these rules.
+
+## Functions
+
+*Functional()* has 6 native functions. Native functions have no reserved identifiers, but their valus associated with the first 6 identifiers (reading from left to right) that appear in the source code. If the source code has less identifiers that the number of native functions, some native functions will not be associated with any identifier.
+
+The native functions are:
+
+1. "Zero"
+    Takes two arguments, returns the second one.
