@@ -136,14 +136,36 @@ while([]()(not(eof())), []()(
 
 There are several things demontrated in this example.
 
-Code `[](a)(==(a, 0))` creates an *UserlandFunction* that takes argument `a` and returns the result of comparison `a` with `0`. In other words, it returns `1` iff `a` is `0`, and `0` otherwise.
+Code `[](a)(==(a, 0))` creates a *UserlandFunction* which takes argument `a` and returns the result of comparison `a` with `0`. In other words, it returns `1` iff `a` is `0`, and `0` otherwise.
 
 Code `var(not, [](a)(==(a, 0)))` assigns the newly created *UserlandFunction* to the global identifier `not`.
 
-The similar thing does the second line: creates a function which takes argument `a` and returns `not(not(a))` (converts it to boolean).
+The second line does a similar thing: creates a function which takes argument `a` and returns `not(not(a))` (converts it to boolean).
 
-Now, the interesting part: *while* loop. The *while* loop is just a function which takes two arguments: `cond` and `func`. While the result of calling `cond` returns a truthy value, call `func`. It is achieved by recursively calling `while` function. We will not describe here in details how and why this works.
+Now, the interesting part: *while* loop. The *while* loop is just a function which takes two arguments: `cond` and `func`. While the result of calling `cond` returns a truthy value, call `func`. It is achieved by recursively calling `while` function. We will not describe here in details how and why it works.
 
 It is possible to spin in a *while* loop forever, without causing a stack overflow. That is done by replacing caller's stack frame with the stack frame of the callee's last *CallChain*.
 
 Finally, we call our `while` function with two *UserlandFunctions*. The first one returns `1` if `eof` returns `0`. The second one reads a bit from the input and writes the bit to the output. In other words: while `eof()` is false, read a bit and output it.
+
+### Example 3: Closures
+
+In *functional()* it is possible to create a closure. A closure is created either by returning a function or passing a function (defined in the local scope) as an argument.
+
+```
+var(func, [](a)(
+  []()(a)
+)),
+
+var(closure, func(1)),
+write(closure()),
+
+write(0), write(0), write(0),
+write(1), write(1)
+```
+
+Function `func` takes argument `a` and returns a function that takes no arguments and returns `a`.
+
+In this example, we are passing `1` as the argument to `func`, and then obtaining it again by calling `closure()`.
+
+Finally, we print the number as ASCII character "1". If you replace `func(1)` with `func(0)` it will print character "0".
