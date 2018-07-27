@@ -100,9 +100,11 @@ If the program is terminated, but the output has no enough bits to form a byte, 
 
 # Examples
 
-We assume the standard IO interface implementation is used. The first 9 identifiers that appear in the source code will be native functions. Accessing undefined identifier returns 0 (actually the 0th global identifier, which may be overriden though). In this examples, we will use identifiers `0`, `1`, `==`, `=`, `var`, `[]`, `read`, `write`, `eof` respectively. Note that there are nothing special about `==`, `=`, `[]`, they are valid identifiers.
+We assume the standard IO interface implementation is used. The first 9 identifiers that appear in the source code will be native functions. Accessing undefined identifier returns 0 (actually the 0th global identifier, which may be overriden though).
 
-### Print letter "A"
+In these examples we will use identifiers `0`, `1`, `==`, `=`, `var`, `[]`, `read`, `write`, `eof` respectively. Note that there are nothing special about `==`, `=`, `[]`, they are valid identifiers.
+
+### Example 1: Print letter "A"
 
 ```
 0, 1,
@@ -117,7 +119,7 @@ The ASCII code of letter "A" is 65, which is 1000001 in binary. Because the *Rea
 
 **Note:** In the following examples the header (first 9 identifiers) are omitted for simplicity, but they are required if you want to run the actual code.
 
-### Cat
+### Example 2: Cat
 
 ```
 var(not, [](a)(==(a, 0))),
@@ -140,4 +142,8 @@ Code `var(not, [](a)(==(a, 0)))` assigns the newly created *UserlandFunction* to
 
 The similar thing does the second line: creates a function which takes argument `a` and returns `not(not(a))` (converts it to boolean).
 
-Now, the interesting part: *while* loop. The *while* loop is just a function which takes two arguments: `cond` and `func`. While the result of calling `cond` returns a truthy value, call `func`.
+Now, the interesting part: *while* loop. The *while* loop is just a function which takes two arguments: `cond` and `func`. While the result of calling `cond` returns a truthy value, call `func`. It is achieved by recursively calling `while` function. We will not describe here in details how and why this works.
+
+It is possible to spin in a *while* loop forever, without causing a stack overflow. That is done by replacing caller's stack frame with the stack frame of the callee's last *CallChain*.
+
+Finally, we call our `while` function with two *UserlandFunctions*. The first one returns `1` if `eof` returns `0`. The second one reads a bit from the input and writes the bit to the output. In other words: while `eof()` is false, read a bit and output it.
