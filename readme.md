@@ -91,3 +91,9 @@ The native functions are:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Takes no arguments, returns 1 if there are no more bits in the input stream,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; otherwise returns 0.
+
+These functions are assigned to the 7th, 8th and 9th identifier from the source code.
+
+The function *Write* considers the 0th global identifier as bit 0 and anything other as bit 1. Both *Read* and *Write* processes bits from input/output starting on the lowest bit of the first byte to the highest bit of the first byte, then the second byte, end so on. Calling *Read* after all input is read returns 0.
+
+If the program is terminated, but the output has no enough bits to form a byte, the last bits are padded with 0 bits in order to complete the byte.
