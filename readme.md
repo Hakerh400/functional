@@ -94,9 +94,9 @@ The native functions are:
 
 These functions are assigned to the 7th, 8th and 9th identifier from the source code.
 
-The function *Write* considers the 0th global identifier as bit 0 and anything other as bit 1. Both *Read* and *Write* processes bits from input/output starting at the lowest bit of the first byte to the highest bit of the first byte, then the second byte, end so on. Calling *Read* after all input is read returns 0.
+The function *Write* considers the 0th global identifier as bit 0 and anything other as bit 1. Both *Read* and *Write* process bits from input/output starting at the lowest bit of the first byte to the highest bit of the first byte, then the second byte, end so on. Calling *Read* after all input is read returns 0.
 
-If the program is terminated, but the output has no enough bits to form a byte, the output will be padded with 0 bits in order to complete the byte.
+If the program is terminated, but the output has no enough bits to form a byte, the output will be padded with 0-bits in order to complete the byte.
 
 # Examples
 
@@ -112,3 +112,7 @@ read, write, eof,
 write(1), write(0), write(0), write(0),
 write(0), write(0), write(1), write(0)
 ```
+
+The ascii code of letter "A" is 65, which is 1000001 in binary. Because the *Read* and *Write* functions process bits from lowest to highest, we need to reverse the bits. The last `write(0)` may be omitted because of padding incomplete bytes with 0-bits.
+
+**Note:** In the next examples the header (first 9 identifiers) are omitted for simplicity, but they are required if you want to run the actual code.
