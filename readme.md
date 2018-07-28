@@ -136,7 +136,7 @@ while([]()(not(eof())), []()(
 
 There are several things demonstrated in this example.
 
-Code `[](a)(==(a, 0))` creates a *UserlandFunction* which takes argument `a` and returns the result of comparison `a` with `0`. In other words, it returns `1` iff `a` is `0`, and `0` otherwise.
+Code `[](a)(==(a, 0))` creates a *UserlandFunction* which takes argument `a` and returns the result of comparison `a` with `0`. In other words, it returns `1` if `a` is `0`, and `0` otherwise.
 
 Code `var(not, [](a)(==(a, 0)))` assigns the newly created *UserlandFunction* to the global identifier `not`.
 
