@@ -206,7 +206,7 @@ The first method is `get`. It takes no arguments and returns the value of `a`. M
 
 We used two tricks here. The first one is the fact that every *UserlandFunction* which is created by a separate call to the 6th native function is different, so we can use it like an enum.
 
-The second trick is syntactical: if two identifiers appear one after another (here `.get` and `.set` appear after `.obj`) they are interpreted like a *CallChain*. Note that `.get` and `.set` are just identifiers, so if you remove the space from `obj .get()` it wont work as expected. For example, `a .b .c` is equivalent to `a(.b)(.c)`, but not `a.b.c`.
+The second trick is syntactical: if two identifiers appear one after another (here `.get` and `.set` appear after `obj`) they are interpreted like a *CallChain*. Note that `.get` and `.set` are just identifiers, so if you remove the space from `obj .get()` it wont work as expected. For example, `a .b .c` is equivalent to `a(.b)(.c)`, but not `a.b.c`.
 
 This code prints "01".
 
