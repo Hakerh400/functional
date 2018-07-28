@@ -75,7 +75,7 @@ The native functions are:
 
 *UserlandFunction* takes zero or more arguments and evaluates them. Then each evaluated argument is assigned to the corresponding internal formal argument and the function body is evaluated in the new scope based on the formal and actual arguments.
 
-## IO Interface
+## IO interface
 
 *Functional()* provides a way of adding native functions before running a program. This implementation provides 3 new functions for IO interface:
 
