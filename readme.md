@@ -208,7 +208,7 @@ We used two tricks here. The first one is the fact that every *UserlandFunction*
 
 The second trick is syntactical: if two identifiers appear one after another (here `.get` and `.set` appear after `obj`) they are interpreted like a *CallChain*. Note that `.get` and `.set` are just identifiers, so if you remove the space from `obj .get()` it wont work as expected. For example, `a .b .c` is equivalent to `a(.b)(.c)`, but not `a.b.c`.
 
-This code prints "01".
+The above code prints "01".
 
 # How to run
 
