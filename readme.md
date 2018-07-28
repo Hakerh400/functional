@@ -142,7 +142,7 @@ Code `var(not, [](a)(==(a, 0)))` assigns the newly created *UserlandFunction* to
 
 The second line does a similar thing: creates a function which takes argument `a` and returns `not(not(a))` (converts it to boolean).
 
-Now, the interesting part: *while* loop. The *while* loop is just a function which takes two arguments: `cond` and `func`. While the result of calling `cond` returns a truthy value, call `func`. It is achieved by recursively calling `while` function. We will not describe here in details how and why it works.
+Now, the interesting part: *while* loop. The *while* loop is just a function which takes two arguments: `cond` and `func`. While the result of calling `cond` returns a truthy value, call `func`. It is achieved by recursively calling `while` function. We wont explain here in details how and why it works.
 
 It is possible to spin in a *while* loop forever, without causing a stack overflow. That is done by replacing caller's stack frame with the stack frame of the callee's last *CallChain*.
 
@@ -200,7 +200,7 @@ write(0), write(0), write(0),
 write(1), write(1)
 ```
 
-Here we have class `Class` which a constructor and two methods. The constructor takes one argument and stores it as a private member `a`.
+Here we have class `Class` which has a constructor and two methods. The constructor takes one argument and stores it as a private member `a`.
 
 The first method is `get`. It takes no arguments and returns the value of `a`. Method `set` takes an argument (here `b`) and assigns the value of `b` to `a`.
 
@@ -218,4 +218,4 @@ Navigate to the `example` directory and run the following command:
 node example.js -src src.txt -i input.txt -o output.txt
 ```
 
-The `src.txt` file contains a simple *function()* program that implements BigInt addition. It reads two integers from the `input.txt` separated by a space, adds them together and saves the resulting number to `output.txt`.
+The `src.txt` file contains a *functional()* program that implements BigInt addition. It reads two integers from the `input.txt` separated by a space, adds them together and saves the resulting number to `output.txt`.
