@@ -102,7 +102,7 @@ If the program is terminated, but the output has no enough bits to form a byte, 
 
 We assume the standard IO interface implementation is used. The first 9 identifiers that appear in the source code will be native functions. Accessing undefined identifier returns 0 (actually the 0th global identifier, which may be overriden though).
 
-In these examples we will use identifiers `0`, `1`, `==`, `=`, `var`, `[]`, `read`, `write`, `eof` respectively. Note that there are nothing special about `==`, `=`, `[]`, they are valid identifiers.
+In these examples we will use identifiers `0`, `1`, `==`, `=`, `var`, `[]`, `read`, `write`, `eof` respectively. Note that there is nothing special about `==`, `=`, `[]`, they are valid identifiers.
 
 ### Example 1: Printing letter "A"
 
