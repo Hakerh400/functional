@@ -4,7 +4,8 @@ const fs = require('fs');
 const O = require('../deps/framework');
 
 const cmdArgs = [
-  '-src',
+  '-header/-h',
+  '-src/-s',
   '-input/-i',
   '-output/-o',
 ].map(cmdArg => {
@@ -21,6 +22,11 @@ function parse(){
   var args = [...process.argv].slice(2);
   var obj = O.obj();
 
+  obj.header = 'header.txt';
+  obj.src = null;
+  obj.input = 'input.txt';
+  obj.output = 'output.txt';
+
   while(args.length !== 0){
     var arg = args.shift();
 
@@ -30,10 +36,8 @@ function parse(){
 
       return cmdArg.some(cmdArg => {
         if(cmdArg !== arg) return 0;
-
-        if(name in obj) err(`${esc(cArg)} is already defined`);
         if(args.length === 0) err(`Incomplete ${esc(cArg)}`);
-
+        
         obj[name] = args.shift();
 
         return 1;
@@ -44,12 +48,8 @@ function parse(){
       err(`Unknown ${esc(arg)}`);
   }
 
-  var missing = cmdArgs.findIndex(cmdArg => {
-    return !(cmdArg.name in obj);
-  });
-
-  if(missing !== -1)
-    err(`Missing ${esc(cmdArgs[missing][0])}`);
+  if(obj.src === null) err('Please specify source file');
+  if(!obj.src.endsWith('.txt')) obj.src += '.txt';
 
   return obj;
 

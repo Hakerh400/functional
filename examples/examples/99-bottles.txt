@@ -1,0 +1,112 @@
+[]()(
+  var(_newLine, String(Byte(0, 1, 0, 1))),
+  var(_space, String(Byte(0, 0, 0, 0, 0, 1))),
+  var(_comma, String(Byte(0, 0, 1, 1, 0, 1)) _space),
+
+  var(_., String(Byte(0, 1, 1, 1, 0, 1))),
+  var(_G, String(Byte(1, 1, 1, 0, 0, 0, 1))),
+  var(_N, String(Byte(0, 1, 1, 1, 0, 0, 1))),
+  var(_T, String(Byte(0, 0, 1, 0, 1, 0, 1))),
+  var(_a, String(Byte(1, 0, 0, 0, 0, 1, 1))),
+  var(_b, String(Byte(0, 1, 0, 0, 0, 1, 1))),
+  var(_d, String(Byte(0, 0, 1, 0, 0, 1, 1))),
+  var(_e, String(Byte(1, 0, 1, 0, 0, 1, 1))),
+  var(_f, String(Byte(0, 1, 1, 0, 0, 1, 1))),
+  var(_h, String(Byte(0, 0, 0, 1, 0, 1, 1))),
+  var(_i, String(Byte(1, 0, 0, 1, 0, 1, 1))),
+  var(_k, String(Byte(1, 1, 0, 1, 0, 1, 1))),
+  var(_l, String(Byte(0, 0, 1, 1, 0, 1, 1))),
+  var(_m, String(Byte(1, 0, 1, 1, 0, 1, 1))),
+  var(_n, String(Byte(0, 1, 1, 1, 0, 1, 1))),
+  var(_o, String(Byte(1, 1, 1, 1, 0, 1, 1))),
+  var(_p, String(Byte(0, 0, 0, 0, 1, 1, 1))),
+  var(_r, String(Byte(0, 1, 0, 0, 1, 1, 1))),
+  var(_s, String(Byte(1, 1, 0, 0, 1, 1, 1))),
+  var(_t, String(Byte(0, 0, 1, 0, 1, 1, 1))),
+  var(_u, String(Byte(1, 0, 1, 0, 1, 1, 1))),
+  var(_w, String(Byte(1, 1, 1, 0, 1, 1, 1))),
+  var(_y, String(Byte(1, 0, 0, 1, 1, 1, 1))),
+
+  var(ofBeer, [](base)(
+    base _space _o _f _space _b _e _e _r
+  )),
+
+  var(getWall, [](base)(
+    base .clone()
+      _space _o _n _space _t _h _e _space _w _a _l _l
+  )),
+
+  var(num, [](full, cap)(
+    neq(bottlesNum, Byte())([]()(
+      writeInt(bottlesNum)
+    ), []()(
+      bool(cap)(_N, _n).clone() _o _space _m _o _r _e .write()
+    ))(),
+
+    _space .write(),
+
+    bool(full)([]()(
+      plural()(_walls, _wall).write()
+    ))()
+  )),
+
+  var(plural, []()(
+    neq(bottlesNum, Byte(1))
+  )),
+
+  var(line1, [](cap)(
+    num(1, cap),
+    _comma .write(),
+
+    num(),
+    plural()(_bottles, _bottle).write(),
+    _. .write(),
+    _newLine .write()
+  )),
+
+  var(line2, []()(
+    _comma .write(),
+    num(1),
+    _. .write()
+  )),
+
+  var(reset, []()(
+    =(bottlesNum, Byte(1, 1, 0, 0, 0, 1, 1))
+  )),
+
+  var(_bottle, String() _b _o _t _t _l _e),
+  var(_bottles, ofBeer(_bottle .clone() _s)),
+
+  var(_wall, getWall(ofBeer(_bottle))),
+  var(_walls, getWall(_bottles)),
+
+  var(_and, String() _a _n _d),
+
+  var(_take, String() _T _a _k _e _space _o _n _e)
+    _space _d _o _w _n _space _and _space _p _a _s _s
+    _space _i _t _space _a _r _o _u _n _d,
+
+  var(bottlesNum, Byte()),
+  reset(),
+
+  while([]()(neq(bottlesNum, Byte())), []()(
+    line1(),
+
+    =(bottlesNum, -(bottlesNum, Byte(1))),
+
+    _take .write(),
+    line2(),
+    
+    _newLine .write(),
+    _newLine .write()
+  )),
+
+  line1(1),
+
+  String() _G _o _space _t _o _space _t _h _e _space _s _t _o _r _e
+    _space _and _space _b _u _y _space _s _o _m _e _space _m _o _r _e
+    .write(),
+
+  reset(),
+  line2()
+)()
