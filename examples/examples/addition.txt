@@ -1,9 +1,6 @@
 []()(
-  var(space, Byte(0, 0, 0, 0, 0, 1, 0, 0)),
-  var('0', Byte(0, 0, 0, 0, 1, 1, 0, 0)),
-
-  var(9, Byte(1, 0, 0, 1)),
-  var(10, Byte(0, 1, 0, 1)),
+  var(space, 32n),
+  var('0', 48n),
 
   var(num1, List()),
   var(num2, List()),
@@ -23,35 +20,35 @@
   )),
 
   var(num3, List()),
-  var(carry, Byte()),
+  var(carry, 0n),
 
   while([]()(
     ||(bool(num1 .head), bool(num2 .head))
   ), []()(
     var(b1, not(=(b1, num1 .pop()))([]()(
-      Byte()
+      0n
     ), []()(
       -(b1, '0')
     ))()),
 
     var(b2, not(=(b2, num2 .pop()))([]()(
-      Byte()
+      0n
     ), []()(
       -(b2, '0')
     ))()),
 
     var(byte, +(carry, +(b1, b2))),
 
-    =(carry, gt(byte, 9))([]()(
-      =(byte, -(byte, 10))
+    =(carry, gt(byte, 9n))([]()(
+      =(byte, -(byte, 10n))
     ))(),
 
-    =(carry, Byte(carry)),
+    =(carry, carry(1n, 0n)),
     num3 .push(byte)
   )),
 
-  gt(carry, Byte())([]()(
-    num3 .push(Byte(1))
+  eq(carry, 1n)([]()(
+    num3 .push(1n)
   ))(),
 
   while([]()(

@@ -1,0 +1,32 @@
+[]()(
+  var(i, 1n),
+  var(max, 100n),
+
+  var(zz, String() _z _z),
+  var(Fizz, _F _i zz),
+  var(Buzz, _B _u zz),
+  var(FizzBuzz, Fizz .clone() Buzz),
+
+  var(first, 1),
+
+  while([]()(lte(i, max)), []()(
+    not(first)([]()(
+      _newLine .write()
+    ), []()(
+      =(first, 0)
+    ))(),
+
+    var(%3, eq(%(i, 3n), 0n)),
+    var(%5, eq(%(i, 5n), 0n)),
+
+    &&(%3, %5)(FizzBuzz,
+      %3(Fizz, %5(Buzz, _))
+    ).write(),
+
+    not(||(%3, %5))([]()(
+      writeInt(i)
+    ))(),
+
+    =(i, +(i, 1n))
+  ))
+)()
