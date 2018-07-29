@@ -1,4 +1,6 @@
 []()(
+  var(comma, String() _comma _space),
+
   var(ofBeer, [](base)(
     base _space _o _f _space _b _e _e _r
   )),
@@ -28,7 +30,7 @@
 
   var(line1, [](cap)(
     num(1, cap),
-    _comma .write(),
+    comma .write(),
 
     num(),
     plural()(_bottles, _bottle).write(),
@@ -37,7 +39,7 @@
   )),
 
   var(line2, []()(
-    _comma .write(),
+    comma .write(),
     num(1),
     _. .write()
   )),
