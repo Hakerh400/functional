@@ -264,7 +264,7 @@ class Machine{
           var userFunc = stack[stack.length - 1];
           mainCbInfo.identsArr = userFunc.identsArrPrev;
 
-          stack[stack.length - 1] = elem.result;
+          stack[stack.length - 1] = result;
 
           continue;
         }

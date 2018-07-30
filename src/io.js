@@ -36,7 +36,8 @@ class IO{
   write(cbInfo){
     if(!cbInfo.evald) return cbInfo.args;
 
-    var bit = cbInfo.getArg(0) !== cbInfo.getIdent(0, 0);
+    var arg = cbInfo.getArg(0);
+    var bit = arg !== cbInfo.getIdent(0, 0);
 
     var {output, outputIndex} = this;
     this.outputIndex++;
@@ -50,6 +51,8 @@ class IO{
     }
 
     this.output[byteIndex] |= bit << bitIndex;
+
+    return arg;
   }
 
   isEof(cbInfo){
