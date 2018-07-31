@@ -21,7 +21,7 @@ function main(){
   var input = fs.readFileSync(args.input);
 
   var machine = new functional.Machine([header, src]);
-  var io = new functional.IO(machine, input);
+  var io = new functional.io.IO(machine, input);
 
   var tick = machine.start();
   while(!tick.next().done);

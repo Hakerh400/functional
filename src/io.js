@@ -2,24 +2,77 @@
 
 const O = require('../deps/framework');
 
-class IO{
+class IOBase{
   constructor(machine, input){
     this.machine = machine;
     this.input = Buffer.from(input);
-    this.output = Buffer.alloc(1);
-
-    this.inputIndex = 0;
-    this.outputIndex = 0;
 
     machine.addFunc(this.read.bind(this));
     machine.addFunc(this.write.bind(this));
-    machine.addFunc(this.isEof.bind(this));
+    machine.addFunc(this.eof.bind(this));
+  }
+
+  read(){}
+  write(){}
+  eof(){}
+
+  getOutput(){}
+};
+
+class IOBit extends IOBase{
+  constructor(machine, input){
+    super(machine, input);
+
+    this.output = '';
   }
 
   read(cbInfo){
     if(!cbInfo.evald) return cbInfo.args;
 
-    if(this.eof())
+    if(this.input.length === 0) return;
+    var bit = this.input[0] | 0;
+    this.input = this.input.substring(1);
+
+    return cbInfo.getIdent(0, bit);
+  }
+
+  write(cbInfo){
+    if(!cbInfo.evald) return cbInfo.args;
+
+    var arg = cbInfo.getArg(0);
+    var bit = arg !== cbInfo.getIdent(0, 0) | 0;
+    this.output += String(bit);
+
+    return arg;
+  }
+
+  eof(cbInfo){
+    if(!cbInfo.evald) return cbInfo.args;
+
+    var eof = this.input.length === 0 | 0;
+
+    return cbInfo.getIdent(0, eof);
+  }
+
+  getOutput(){
+    return this.output;
+  }
+};
+
+class IO extends IOBase{
+  constructor(machine, input){
+    super(machine, input);
+
+    this.output = Buffer.alloc(1);
+
+    this.inputIndex = 0;
+    this.outputIndex = 0;
+  }
+
+  read(cbInfo){
+    if(!cbInfo.evald) return cbInfo.args;
+
+    if(this.isEof())
       return;
 
     var {inputIndex} = this;
@@ -55,15 +108,15 @@ class IO{
     return arg;
   }
 
-  isEof(cbInfo){
+  eof(cbInfo){
     if(!cbInfo.evald) return cbInfo.args;
     
-    var eof = this.eof() | 0;
+    var eof = this.isEof() | 0;
 
     return cbInfo.getIdent(0, eof);
   }
 
-  eof(){
+  isEof(){
     return (this.inputIndex >> 3) === this.input.length;
   }
 
@@ -75,4 +128,8 @@ class IO{
   }
 };
 
-module.exports = IO;
+module.exports = {
+  IOBase,
+  IOBit,
+  IO,
+};
