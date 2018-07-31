@@ -238,8 +238,6 @@ class Machine{
       var elem = stack[stack.length - 1];
 
       if(elem instanceof EvalList){
-        var a = stack.slice();
-
         while(!elem.evald){
           var e = elem.get();
           var func = mainCbInfo.getIdent(1, e.ident.id);
