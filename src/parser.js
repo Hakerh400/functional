@@ -99,10 +99,22 @@ class List extends Element{
   }
 
   toString(){
-    try{
-      return `(${this.arr.join(',')})`;
-    }catch{
-      return '(...)';
+    var stack = [new Stringified(this)];
+
+    while(1){
+      var elem = stack[stack.length - 1];
+
+      if(elem.done){
+        if(stack.length === 1)
+          return elem.str;
+
+        stack.pop();
+        stack[stack.length - 1].set(elem.str);
+
+        continue;
+      }
+
+      stack.push(new Stringified(elem.get()));
     }
   }
 
@@ -138,6 +150,43 @@ class CallChain extends Element{
   isCall(){ return true; }
 }
 
+class Stringified{
+  constructor(elem){
+    var isList = elem instanceof List;
+
+    this.arr = elem.arr.slice();
+    this.str = isList ? '(' : elem.ident.id;
+    this.isList = isList;
+    this.done = this.arr.length === 0;
+
+    if(this.done && this.isList)
+      this.str += ')';
+  }
+
+  len(){
+    return this.length;
+  }
+
+  get(){
+    return this.arr[0];
+  }
+
+  set(str){
+    if(this.isList && this.str.length !== 1)
+      this.str += ',';
+
+    this.str += str;
+    this.arr.shift();
+
+    if(this.arr.length === 0){
+      this.done = 1;
+
+      if(this.isList)
+        this.str += ')';
+    }
+  }
+};
+
 class Parsed{
   constructor(list){
     this.list = list;
@@ -153,6 +202,9 @@ module.exports = {
   Identifier,
   List,
   CallChain,
+
+  Stringified,
   Parsed,
+
   parse,
 };

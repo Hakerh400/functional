@@ -1,6 +1,59 @@
 'use strict';
 
+const util = require('util');
+
 const O = {
+  init(){
+    if(!global.isConsoleOverriden)
+      O.createGlobalLogFunc();
+  },
+
+  createGlobalLogFunc(){
+    var console = global.console;
+    var logOrig = console.log;
+
+    var indent = 0;
+
+    var logFunc = (...args) => {
+      var indentStr = '  '.repeat(indent);
+      var str = O.inspect(args);
+
+      str = O.sanl(str).map(line => {
+        return `${indentStr}${line}`;
+      }).join('\n');
+
+      logOrig(str);
+
+      return args[args.length - 1];
+    };
+
+    logFunc.inc = (val=1) => {
+      indent += val;
+    };
+
+    logFunc.dec = (val=1) => {
+      indent -= val;
+      if(indent < 0) indent = 0;
+    };
+
+    logFunc.get = () => {
+      return indent;
+    };
+
+    logFunc.set = i => {
+      indent = i;
+    };
+
+    global.log = logFunc;
+  },
+
+  inspect(arr){
+    if(!(arr.length === 1 && typeof arr[0] === 'string'))
+      arr = arr.map(val => util.inspect(val));
+
+    return arr.join(' ');
+  },
+
   obj(proto=null){
     return Object.create(proto);
   },
@@ -18,6 +71,14 @@ const O = {
 
   binLen(a){
     return a && (Math.log2(a) | 0) + 1;
+  },
+
+  sanl(str){
+    return str.split(/\r\n|\r|\n/g);
+  },
+
+  sanll(str){
+    return str.split(/\r\n\r\n|\r\r|\n\n/g);
   },
 
   BitStream: class{
@@ -197,5 +258,7 @@ const O = {
     }
   },
 };
+
+O.init();
 
 module.exports = O;

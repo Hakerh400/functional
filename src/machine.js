@@ -1,6 +1,7 @@
 'use strict';
 
 const O = require('../deps/framework');
+const debug = require('../deps/debug');
 const tokenizer = require('./tokenizer');
 const parser = require('./parser');
 const compiler = require('./compiler');
@@ -237,6 +238,8 @@ class Machine{
       var elem = stack[stack.length - 1];
 
       if(elem instanceof EvalList){
+        var a = stack.slice();
+
         while(!elem.evald){
           var e = elem.get();
           var func = mainCbInfo.getIdent(1, e.ident.id);
@@ -305,6 +308,21 @@ class Machine{
       if(elem instanceof UserlandFunctionCall){
         elem.identsArrPrev = mainCbInfo.identsArr;
         mainCbInfo.identsArr = elem.identsArr;
+
+        if(stack.length !== 3){
+          var userFunc = stack[stack.length - 4];
+
+          if(userFunc instanceof UserlandFunctionCall){
+            var e1 = stack[stack.length - 3];
+            var e2 = stack[stack.length - 2];
+
+            if(e1.reduce && e1.arr.length === 1 && e2.arr.length === 1){
+              elem.identsArrPrev = userFunc.identsArrPrev;
+              stack.splice(stack.length - 4, 3);
+            }
+          }
+        }
+
         stack.push(elem.body);
       }
 
@@ -364,7 +382,7 @@ class EvalList{
   }
 
   toString(){
-    return this.arr.join(',');
+    return `LIST: ${this.arr.join(',')}`;
   }
 };
 
@@ -382,7 +400,7 @@ class EvalCallChain{
     if(deep) arr = arr.map(a => a.clone(1));
     else arr = arr.slice();
 
-    return new EvalList(this.func, arr);
+    return new EvalCallChain(this.func, arr);
   }
 
   get(){
@@ -396,7 +414,7 @@ class EvalCallChain{
   }
 
   toString(){
-    return `${this.func}${this.arr.join('')}`;
+    return `CALL_CHAIN: ${this.func}${this.arr.join('')}`;
   }
 };
 
@@ -469,7 +487,7 @@ class CallbackInfo{
   }
 
   toString(){
-    return `CBINFO: ${this.func}(${this.args})`;
+    return `CB_INFO: ${this.func}(${this.args})`;
   }
 };
 
@@ -482,7 +500,7 @@ class UserlandFunctionCall{
   }
 
   toString(){
-    return `USERFUNC: ${this.body}`;
+    return `USER_FUNC: ${this.body}`;
   }
 };
 
