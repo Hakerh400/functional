@@ -8,6 +8,8 @@ const compiler = require('./compiler');
 
 const {Identifier, List, CallChain} = parser;
 
+const DEFAULT_MAX_STACK_SIZE = Infinity;
+
 class Machine{
   constructor(compiled){
     if(!(compiled instanceof Buffer)){
@@ -196,7 +198,7 @@ class Machine{
     func.identsArr = [idents];
   }
 
-  *start(maxStackSize=1e4, ticksNum=0){
+  *start(maxStackSize=DEFAULT_MAX_STACK_SIZE, ticksNum=0){
     var {funcs, idents} = this;
 
     var arr = this.parsed.arr.slice();

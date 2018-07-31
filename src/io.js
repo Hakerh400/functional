@@ -5,12 +5,14 @@ const O = require('../deps/framework');
 class IOBase{
   constructor(machine, input){
     this.machine = machine;
-    this.input = Buffer.from(input);
+    this.input = input;
 
     machine.addFunc(this.read.bind(this));
     machine.addFunc(this.write.bind(this));
     machine.addFunc(this.eof.bind(this));
   }
+
+  static name(){}
 
   read(){}
   write(){}
@@ -25,6 +27,8 @@ class IOBit extends IOBase{
 
     this.output = '';
   }
+
+  static name(){ return 'Bit'; }
 
   read(cbInfo){
     if(!cbInfo.evald) return cbInfo.args;
@@ -61,13 +65,15 @@ class IOBit extends IOBase{
 
 class IO extends IOBase{
   constructor(machine, input){
-    super(machine, input);
+    super(machine, Buffer.from(input));
 
     this.output = Buffer.alloc(1);
 
     this.inputIndex = 0;
     this.outputIndex = 0;
   }
+
+  static name(){ return 'Standard'; }
 
   read(cbInfo){
     if(!cbInfo.evald) return cbInfo.args;
