@@ -439,7 +439,7 @@ var(String, [](byte)(
   =(_M, next()), =(_N, next()), =(_O, next()), =(_P, next()),
   =(_Q, next()), =(_R, next()), =(_S, next()), =(_T, next()),
   =(_U, next()), =(_V, next()), =(_W, next()), =(_X, next()),
-  =(_Y, next()), =(_Z, next()), =(_[, next()), =(_\, next()),
+  =(_Y, next()), =(_Z, next()), =(_[, next()), =(\\, next()),
   =(_], next()), =(_^, next()), =(__, next()), =(_`, next()),
   =(_a, next()), =(_b, next()), =(_c, next()), =(_d, next()),
   =(_e, next()), =(_f, next()), =(_g, next()), =(_h, next()),

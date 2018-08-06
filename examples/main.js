@@ -27,7 +27,7 @@ function main(){
   while(!tick.next().done);
 
   if(machine.error){
-    console.log('Max stack size exceeded');
+    console.log('ERROR: Out of memory');
     return;
   }
 
