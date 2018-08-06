@@ -1,6 +1,7 @@
 'use strict';
 
 const O = require('../deps/framework');
+const tokenizer = require('./tokenizer');
 
 function parse(tokenized){
   var {tokens} = tokenized;
@@ -72,8 +73,8 @@ class Identifier extends Element{
 
   toString(){
     var {id} = this;
-    if(typeof id !== 'string') return `${id}`;
-    return id.replace(/[\(\)\,]/g, a => `\\${a}`);
+    if(typeof id !== 'string') return String(id);
+    return tokenizer.Tokenized.stringify(id, 0);
   }
 
   isIdent(){ return true; }
@@ -155,7 +156,7 @@ class Stringified{
     var isList = elem instanceof List;
 
     this.arr = elem.arr.slice();
-    this.str = isList ? '(' : elem.ident.id;
+    this.str = isList ? '(' : elem.ident.toString();
     this.isList = isList;
     this.done = this.arr.length === 0;
 

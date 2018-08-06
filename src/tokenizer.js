@@ -53,13 +53,15 @@ function tokenize(src){
     else str = ')';
 
     var reg;
-    if(parens === 0) reg = /^.[^\(\,\s]*/;
-    else reg = /^.[^\(\)\,\s]*/;
+    if(parens === 0) reg = /^(?:\\[\s\S]|[\s\S])(?:\\[\s\S]|[^\(\,\s])*/;
+    else reg = /^(?:\\[\s\S]|[\s\S])(?:\\[\s\S]|[^\(\)\,\s])*/;
 
     var match = str.match(reg);
 
     var s = match[0];
     i += s.length - 1;
+
+    s = s.replace(/\\([\\\(\)\,\s])/g, (a, b) => b);
 
     if(ident) tokens.push(s);
     else tokens.push(0, s, 1);
@@ -89,7 +91,7 @@ function tokenize(src){
   }
 
   function forcedIdent(){
-    if(tokens.length === 0) return false;
+    if(tokens.length === 0) return 0;
     return tokens[tokens.length - 1] === 2;
   }
 }
@@ -99,13 +101,33 @@ class Tokenized{
     this.tokens = tokens;
   }
 
+  static stringify(str, quotes=1){
+    str = str.split('').map(char => {
+      if(char >= ' ' && char <= '~'){
+        if(char === '\\') return '\\\\';
+        if(quotes && char === '"') return '\\"';
+        return char;
+      }
+
+      if(char === '\r') return '\\r';
+      if(char === '\n') return '\\n';
+
+      return `\\x${O.cc(char).toString(16).toUpperCase().padStart(2, '0')}`;
+    }).join('');
+
+    if(quotes)
+      str = `"${str}"`;
+
+    return str;
+  }
+
   toString(){
     var str = this.tokens.map(token => {
       switch(token){
         case 0: return '('; break;
         case 1: return ')'; break;
         case 2: return ','; break;
-        default: return `"${token}"`; break;
+        default: return Tokenized.stringify(token); break;
       }
     }).join(' ');
 

@@ -13,10 +13,10 @@ const args = cmdArgsParser.parse();
 setTimeout(main);
 
 function main(){
-  var header = fs.readFileSync(cwd(args.header), 'ascii');
+  var header = O.buff2ascii(fs.readFileSync(cwd(args.header)));
 
   var srcFile = path.join(examplesDir, args.src);
-  var src = fs.readFileSync(srcFile, 'ascii');
+  var src = O.buff2ascii(fs.readFileSync(srcFile));
 
   var input = fs.readFileSync(args.input);
 

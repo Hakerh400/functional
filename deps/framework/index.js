@@ -54,14 +54,6 @@ const O = {
     return arr.join(' ');
   },
 
-  obj(proto=null){
-    return Object.create(proto);
-  },
-
-  cap(str){
-    return `${str[0].toUpperCase()}${str.substring(1)}`;
-  },
-
   ca(len, func){
     var arr = [];
     for(var i = 0; i < len; i++)
@@ -69,17 +61,19 @@ const O = {
     return arr;
   },
 
-  binLen(a){
-    return a && (Math.log2(a) | 0) + 1;
+  buff2ascii(buff){
+    return [...buff].map(cc => {
+      return O.sfcc(cc);
+    }).join('');
   },
 
-  sanl(str){
-    return str.split(/\r\n|\r|\n/g);
-  },
-
-  sanll(str){
-    return str.split(/\r\n\r\n|\r\r|\n\n/g);
-  },
+  obj(proto=null){ return Object.create(proto); },
+  cap(str){ return `${str[0].toUpperCase()}${str.substring(1)}`; },
+  binLen(a){ return a && (Math.log2(a) | 0) + 1; },
+  sanl(str){ return str.split(/\r\n|\r|\n/g); },
+  sanll(str){ return str.split(/\r\n\r\n|\r\r|\n\n/g); },
+  cc(char){ return char.charCodeAt(0); },
+  sfcc(cc){ return String.fromCharCode(cc); },
 
   BitStream: class{
     constructor(arr=null, checksum=false){
