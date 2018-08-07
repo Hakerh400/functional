@@ -219,6 +219,6 @@ node main.js -src <source file name>
 ```
 
 where `<source file name>` is the name of the file from `examples` subdirectory you want to run.<br/>
-For example: `node main.js -src addition`.
+For example: `node main.js -src addition`
 
 The program reads from `input.txt` file and writes to `output.txt` file.
