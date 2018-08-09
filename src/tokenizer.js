@@ -5,7 +5,7 @@ const O = require('../deps/framework');
 function tokenize(src){
   if(Array.isArray(src)){
     src = src.filter(src => src.trim().length !== 0);
-    src = src.join(',\n\n');
+    src = src.join(',');
   }
 
   var len = src.length;
