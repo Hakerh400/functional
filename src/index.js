@@ -5,10 +5,6 @@ const functional = require('./functional');
 
 const {Machine} = functional;
 
-const PROB = .8;
-const PROB_LINES = PROB;
-const PROB_PARENS = PROB;
-
 module.exports = {
   ...functional,
 
@@ -31,77 +27,12 @@ function run(src, input, IO=functional.io.IO){
 }
 
 function generate(){
-  var str = `${O.ca(9, i => i).join(', ')},\n\n`;
+  var header = '0,1,2,3,4,5,6,7,8';
+  var src = '';
 
-  var parens = 0;
-  var mode = 0;
+  src = `${header},\n\n${src}`;
 
-  var ffirst = 1;
-  var first = 0;
-
-  var hasWrite = 0;
-
-  while(1){
-    if(mode === 0){
-      if(parens === 0){
-        if(hasWrite && O.randf(1) < 1 - PROB_LINES) break;
-
-        if(!ffirst) comma();
-        ffirst = 0;
-
-        str += ident();
-        inc();
-      }else{
-        if(bit()){
-          if(!first) comma();
-          str += ident();
-          mode = 1;
-          first = 0;
-        }else{
-          dec();
-        }
-      }
-    }else{
-      if(bit()){
-        inc();
-        mode = 0;
-      }else{
-        mode = 0;
-        first = 0;
-      }
-    }
-  }
-
-  return str;
-
-  function inc(){
-    str += '(';
-    parens++;
-    mode = 0;
-    first = 1;
-  }
-
-  function dec(){
-    str += ')';
-    parens--;
-    mode = 1;
-    first = 0;
-  }
-
-  function comma(){
-    var s = parens === 0 ? '\n' : ' ';
-    str += `,${s}`;
-  }
-
-  function ident(){
-    var id = O.rand(16);
-    if(id === 7) hasWrite = 1;
-    return id.toString(16).toUpperCase();
-  }
-
-  function bit(){
-    return O.rand(2 + parens * (1 - PROB_PARENS)) === 0 | 0;
-  }
+  return src;
 }
 
 function compile(src){

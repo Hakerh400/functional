@@ -54,6 +54,16 @@ const O = {
     return arr.join(' ');
   },
 
+  rand(a, b=null){
+    if(b !== null) return a + Math.random() * (b - a + 1) | 0;
+    return Math.random() * a | 0;
+  },
+
+  randf(a, b=null){
+    if(b !== null) return a + Math.random() * (b - a);
+    return Math.random() * a;
+  },
+
   ca(len, func){
     var arr = [];
     for(var i = 0; i < len; i++)
