@@ -3,7 +3,7 @@ Online interpreter can be found [here](https://hakerh400.github.io/?project=func
 
 # How to run
 
-Navigate to the `example` directory and run the following command:
+Navigate to the `examples` directory and run the following command:
 
 ```
 node main.js -src <source file name>
