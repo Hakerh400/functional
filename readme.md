@@ -129,7 +129,7 @@ Don't be scared of the huge amout of nested iterations described here. There is 
 
 ### Non-inetger number
 
-A non-integer may be implemented as the IEEE floating single-precision or double-precision number. It consists of sign, mantissa and exponent. Implementing operatins on them would be easy if all the previous concepts are already implemented.
+A non-integer may be implemented as the IEEE floating single-precision or double-precision number. It consists of sign, mantissa and exponent. Implementing operatins on them would be easy if all of the previous concepts are already implemented.
 
 ### Math operations
 
