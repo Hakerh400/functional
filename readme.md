@@ -19,7 +19,7 @@
 
 Some if these concepts are implemented in v1.0.0, some are planned for v2.0.0.
 
-##Examples
+## Examples
 
 For the actual code, see the `examples` directory. Here we are focusing on the abstract approaches for implementing some concepts, rather on writing the code. All concepts can be implemented using native functions and/or previously implemented concepts. Native functions are the following:
 
@@ -31,18 +31,18 @@ For the actual code, see the `examples` directory. Here we are focusing on the a
 
 The concepts described in the following examples **are not natively supported** by *Functional()*, they need to be implemented as user-defined functions.
 
-###Bits
+### Bits
 
 While bits are native functions, what they do is a developer's decision. Probably the most useful action a bit can do as a function is:
 
 1. Bit 0 - takes two arguments, returns the second one
 2. Bit 0 - takes two arguments, returns the first one
 
-###If statement
+### If statement
 
 Using bits as defined above, we can define function `if` that takes three arguments. If the first one is `0` (use comparator to check that), call the second one, otherwise call the third one.
 
-###While loop
+### While loop
 
 The `while` loop is a bit harder. It can be implemented as a function that takes two arguments. While the result of calling the first argument is truthy (different from `0`) call the second argument. It may be achieved by defining a function that does the following:
 
@@ -51,7 +51,7 @@ The `while` loop is a bit harder. It can be implemented as a function that takes
   - If the result if truthy, call the second argument and call the `while` again with the same arguments
   - Otherwise, do nothing (or optionally return something)
 
-###Ordered pair
+### Ordered pair
 
 Probably the most useful and basic structure is ordered pair. It is a pair of two values that may be accessed or modified at runtime. This concept may be implemented like following:
 
@@ -62,19 +62,19 @@ Probably the most useful and basic structure is ordered pair. It is a pair of tw
   - If the first argument is 0, return A or B based on the truthiness of the second argument (for example 0 gives A and 1 gives B)
   - If the first argument is 1, assign the third argument to the A or B based on the truthiness of the second argument
 
-###Byte
+### Byte
 
 Byte is a pair of pairs of pairs of bits. Reading and modifying specific bits can be achieved similarly to Pair implementation.
 
-###Linked list
+### Linked list
 
 Another very useful structure. An element of a linked list is a Pair that has the actual value as the first element and the next list element as the second arguemnt. If there are no more list elements, 0 can be used (similarly to `nullptr` in C++, since the 0 is the only falsy value). An element of a double linked list is similar, but the second element of element's pair is a pair of previous and next list element.
 
-###Tree
+### Tree
 
 Similar to linked list. Here all elements are similar to elements of double linked list, since two pointers are needed (for the left and right child nodes). Actually, pointers in *Functional()* are not like in C++, they are more like references in Python or JavaScript.
 
-###Class
+### Class
 
 Despite the fact that *Functional()* is strictly functioncal, other paradigms may be introduced relatively easily, especially the object-oriented paradigm. Classes may look like this:
 
@@ -88,31 +88,31 @@ Despite the fact that *Functional()* is strictly functioncal, other paradigms ma
 
 Unique global identifiers are empty functions (assembled using no other function, so they are empty, but every such function are different according to the native comparator). They can be used to implement enums, or to distinguish between method names, as explained above.
 
-###Integer
+### Integer
 
 A 16-bit, 32-bit or 64-bit integer (or even larger one) is a complete tree of bytes.
 
-###Array
+### Array
 
 May be implemented using a lot of different methods. The most common are lists and trees.
 
-###BigInt
+### BigInt
 
 Array of bytes.
 
-###String
+### String
 
 Same as BigInt, but provides different methods.
 
-###Vector, Matrix, Tensor of any kind
+### Vector, Matrix, Tensor of any kind
 
 Array for vectors, nested arrays for others.
 
-###Integer comparisons
+### Integer comparisons
 
 By iterating over bits, operations like `==`, `>`, `<`, `>=`, `<=` can be easily implemented.
 
-###Integer operations
+### Integer operations
 
 Simple solution:
 
@@ -125,19 +125,19 @@ Simple solution:
 
 Don't be scared of the huge amout of recursive iterations described here. There is no need to worry about performances, since the optimizer may replace any of these operations with just a single processor instruction. For example, multiplying two 64-bit integers requires 64 * 64 function calls in the wors case, but the optimizer may replace it with just a single `mul rax, rbx` instruction, increasing the speed thousands of times. Also, the otpimizer may replace bytes and integers with literal processor integers and use them instead, avoiding the closures completely.
 
-###Non-inetger numbers
+### Non-inetger numbers
 
 A non-integer may be implemented as the IEEE floating single-precision or double-precision number. It consists of sign, mantissa and exponent. Implementing operatins on them would be easy of all the previous concepts are already implemented.
 
-###Math operations
+### Math operations
 
 Operations like trigonometric functions, logarithms, exponentiation (including non-integer exponents), and similar can be achieved using Maclaurin series, which reduces the problem to basic floating-point operations.
 
-###Constants like PI, E, Euler–Mascheroni constant and similar
+### Constants like PI, E, Euler–Mascheroni constant and similar
 
 Each of these constants can be either defined as a constant of bounded precision, or evaluated at runtime to an arbitrary presion using some algorithm.
 
-###Other ideas
+### Other ideas
 
 We explained how to implement some basic concepts, functions and data-structures. With that, everything other is relatively easy. One may implement JavaScript interpreter using all of that definitions, since JavaScript code can be converted to *Functional()* code and JavaScript built-ins (like Math, Object, Array, String, etc) can be implemented using above concepts. Also, it's not so hard to create a *Functional()* interpreter in *Functional()* (the biggest problems are closures and garbage collectors).
 
