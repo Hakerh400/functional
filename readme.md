@@ -19,7 +19,7 @@
 
 Some if these concepts are implemented in v1.0.0, some are planned for v2.0.0.
 
-## Examples
+# Examples
 
 For the actual code, see the `examples` directory. Here we are focusing on the abstract approaches for implementing some concepts, rather on writing the code. All concepts can be implemented using native functions and/or previously implemented concepts. Native functions are the following:
 
