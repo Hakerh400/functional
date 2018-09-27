@@ -4,7 +4,7 @@
 2. **It is 100% in functional programming paradigm.** *Functional()* doesn't natively know about concepts such as numbers (bytes, integers, floating-points, etc), arrays, objects, sets, hash tables, classes, `for` and `while` loops, threads, memory, instructions, and so on. Everything it knows are functions and everything it does is call functions.
 3. **It doesn't have syntax errors.** Any string is a valid *Functional()* program.
 4. **It doesn't provide any non-elementary native function.** There are two types of functions: native and user-defined. The set of native functions are the smallest possible. It doesn't contain any function that possibly could be defined by a user.
-5. **There are no syntactical difference between function definition and function call.** This is something that is not seen in too many languages (if any language implements this concept at all). In other words, without running the program, it is impossible to tell if some function call is a new function definition, or just a regular function call.
+5. **There are no syntactical differences between function definition and function call.** This is something that is not seen in too many languages (if any language implements this concept at all). In other words, without running the program, it is impossible to tell if some function call is a new function definition, or just a regular function call.
 6. **It has variables.** A variable in *Functional()* is just a function that is assigned to an identifier. It may be global, or defined inside a function. Variables are evaluated at runtime. There are no constants, even native functions can be modified (actually, a function itself can't be modified, but the identifier that is associated with it).
 7. **It has closures.** A function may be defined inside another function. Then it can be returned, or passed to another function. That is how a closure is created.
 8. **It is 100% deterministic.** Every *Functional()* program that eventually halts, given the same input, it always produces the same output. Program execution doesn't depend on current time, operating system, files on disk, or similar. Also, there are no way to generate a random output for constant input.
@@ -16,8 +16,10 @@
 14. **A user-defined function can't detect the number of arguments it has been called with.**
 15. **A user-defined function can't check if a given variable has been defined or not.**
 16. **There are no destructors.** Garbage collector cleans up the memory implicitly.
+17. **Byte is not a native concept.** *Functional()* doesn't know what a byte (array of 8 consecutive bits) is. Source code, input and output are strings of bits, not bytes. For example, source code can be 11 bits long, input 5 bits and output 17 bits.
+18. **There are no native syntax rules.** The syntax is defined in the source code itself, which gives users the full freedom to adjust how the grammar will look like and how the program will be parsed.
 
-Some of these concepts are implemented in v1.0.0, some are planned for v2.0.0.
+Some of these features are implemented in v1.x, some are planned for v2.x.
 
 # Examples
 
